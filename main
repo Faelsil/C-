@@ -1,0 +1,71 @@
+using System;
+namespace primeirocontato
+{
+    class Progran
+    {
+        static void Main(string[] args)
+        {
+            aluno[] alunos = new aluno[5];
+            var indiceAluno = 0;
+            
+            string opcaoUsuario = NewMethod();
+            while (opcaoUsuario.ToUpper() != "X")
+            {
+                switch (opcaoUsuario)
+                {
+                    case "1":
+                    
+                        Console.WriteLine("informe o nome do aluno:");
+                        aluno aluno1 = new aluno();
+                        aluno1.Nome = Console.ReadLine();
+                        
+                        Console.WriteLine("Informe a nota do aluno:");
+                        
+                        if (decimal.TryParse(Console.ReadLine(), out decimal nota))
+                        {
+                            aluno1.Nota = nota;
+                        }
+                        else
+                        {
+                            throw new ArgumentNullException("O valor da nota deve ser decimal");
+                        }
+                        
+                        alunos[indiceAluno] = aluno1;
+                        indiceAluno++;
+                        
+                        break;
+                        
+                    case "2":
+                        foreach (var aluno in alunos)
+                        {
+                            if (!aluno.Nome.Equals(""))
+                            
+                            {
+                                Console.WriteLine($"ALUNO: {aluno.Nome} - NOTA: {aluno.Nota}");
+                            }
+                        }
+                        break;
+                        
+                    default:
+                    
+                        throw new ArgumentOutOfRangeException();
+                }
+               
+                opcaoUsuario = NewMethod();
+            }
+        }
+        
+        private static string NewMethod()
+        {
+            Console.WriteLine("Informe a opção desejada:");
+            Console.WriteLine("1- Inserir novo aluno");
+            Console.WriteLine("2- Listar alunos");
+            Console.WriteLine("X- Sair");
+            Console.WriteLine();
+            
+            string opcaoUsuario = Console.ReadLine();
+            Console.WriteLine();
+            return opcaoUsuario;
+        }
+    }
+}
